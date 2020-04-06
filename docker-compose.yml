@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    image: golang:1.13
+    hostname: test-api
+    container_name: test-api
+    volumes:
+      - ./:/go/src/github.com/bushiyama/go-simple-api
+    working_dir: /go/src/github.com/bushiyama/go-simple-api
+    environment:
+      - GOPATH=/go
+      - GOENV=local
+      - GO111MODULE=on
+    command: >
+      bash -c "
+      mkdir -p /var/log/api_app
+      && go get github.com/codegangsta/gin
+      && cd cmd/
+      && go run main.go"
+    ports:
+      - "8080:8080"
