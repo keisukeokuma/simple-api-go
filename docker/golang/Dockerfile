@@ -1,6 +1,6 @@
 FROM golang:1.13 as builder
 
-ENV REPOSITORY github.dip-net.co.jp/ku-takeyama/grpc_test_api
+ENV REPOSITORY github.com/bushiyama/go-simple-api
 ARG WORKDIR=$GOPATH/src/${REPOSITORY}
 WORKDIR ${WORKDIR}
 
