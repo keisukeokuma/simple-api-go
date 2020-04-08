@@ -14,7 +14,6 @@ services:
     command: >
       bash -c "
       mkdir -p /var/log/api_app
-      && go get github.com/codegangsta/gin
       && cd cmd/
       && go run main.go"
     ports:
