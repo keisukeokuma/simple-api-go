@@ -6,7 +6,7 @@
 ## usage
 
 ```Console
-$ git clone $GO_HOME/src/[myRep]
+$ git clone $GO_HOME/src/[myRepo]
 :
 $ docker-compose up -d
 :
