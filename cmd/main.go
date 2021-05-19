@@ -11,7 +11,7 @@ import (
 func main() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 
-	// /get?[クエリ]であった場合、handleParamsを実行する
+	// /getにアクセスした場合、handleParamsを実行する
 	myRouter.HandleFunc("/get", handleParams)
 
 	log.Fatal(http.ListenAndServe(":8080", myRouter))
