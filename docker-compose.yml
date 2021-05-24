@@ -5,8 +5,8 @@ services:
     hostname: test-api
     container_name: test-api
     volumes:
-      - ./:/go/src/github.com/bushiyama/go-simple-api
-    working_dir: /go/src/github.com/bushiyama/go-simple-api
+      - ./:/go/src/github.com/keisukeookuma/go-simple-api
+    working_dir: /go/src/github.com/keisukeookuma/go-simple-api
     environment:
       - GOPATH=/go
       - GOENV=local
