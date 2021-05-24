@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"internal/hoge"
+
+	"simple-api-go/internal/hoge"
+
 	"github.com/gorilla/mux"
 )
 
@@ -19,7 +21,7 @@ func main() {
 	myRouter.HandleFunc("/err", echoBadRequestHandler)
 	// myRouter.HandleFunc("/validate", echoValidateHandler)
 
-	hoge.hoge()
+	hoge.Hoge()
 	log.Fatal(http.ListenAndServe(":8080", myRouter))
 
 }
