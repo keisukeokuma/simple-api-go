@@ -11,7 +11,8 @@ import (
 )
 
 type checkId struct {
-	ID int `validate:"min=1,max=99"`
+	ID   int    `validate:"min=1,max=99"`
+	Name string `validate:"required"`
 }
 
 func main() {
@@ -42,15 +43,17 @@ func echoBadRequestHandler(w http.ResponseWriter, r *http.Request) {
 func echoCheckIdHandler(w http.ResponseWriter, r *http.Request) {
 	validate := validator.New()
 
-	id := r.URL.Query().Get("ID")
+	id := r.URL.Query().Get("id")
+	name := r.URL.Query().Get("name")
 	idInt, _ := strconv.Atoi(id)
 	query := checkId{
-		ID: idInt,
+		ID:   idInt,
+		Name: name,
 	}
 
 	if err := validate.Struct(query); err != nil {
 		http.Error(w, "Bad request", http.StatusBadRequest)
 	} else {
-		fmt.Fprintf(w, "ID：%v\n", idInt)
+		fmt.Fprintf(w, "ID：%v\nName:%v", idInt, name)
 	}
 }
