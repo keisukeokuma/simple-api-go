@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 	"gopkg.in/go-playground/validator.v9"
@@ -21,6 +22,7 @@ func main() {
 	myRouter.HandleFunc("/get", echoParamHandler)
 	myRouter.HandleFunc("/err", echoBadRequestHandler)
 	myRouter.HandleFunc("/url_check", echoCheckIdHandler)
+	myRouter.HandleFunc("/time", echoTimeHandler)
 
 	log.Fatal(http.ListenAndServe(":8080", myRouter))
 
@@ -61,4 +63,17 @@ func echoCheckIdHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprintf(w, "ID：%v\nName:%v", idInt, name)
+}
+
+func echoTimeHandler(w http.ResponseWriter, r *http.Request) {
+	// query := r.URL.RawQuery
+	// time := time.Now()
+	layout := "Jan 2, 2006 at 3:04pm (MST)"
+	value := "Feb 3, 2013 at 7:54pm (PST)"
+	t, _ := time.Parse(layout, value)
+
+	// if query == "" {
+
+	// }
+	fmt.Fprintf(w, "Time：%s\n", t)
 }
