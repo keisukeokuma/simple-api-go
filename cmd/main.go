@@ -45,7 +45,12 @@ func echoCheckIdHandler(w http.ResponseWriter, r *http.Request) {
 
 	id := r.URL.Query().Get("id")
 	name := r.URL.Query().Get("name")
-	idInt, _ := strconv.Atoi(id)
+	idInt, err := strconv.Atoi(id)
+	if err != nil {
+		log.Error("bad param.")
+		http.Error(w, "Bad request", http.StatusBadRequest)
+		return
+	}
 	query := checkId{
 		ID:   idInt,
 		Name: name,
@@ -53,7 +58,7 @@ func echoCheckIdHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err := validate.Struct(query); err != nil {
 		http.Error(w, "Bad request", http.StatusBadRequest)
-	} else {
-		fmt.Fprintf(w, "ID：%v\nName:%v", idInt, name)
+		return
 	}
+	fmt.Fprintf(w, "ID：%v\nName:%v", idInt, name)
 }
