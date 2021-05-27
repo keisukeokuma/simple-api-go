@@ -47,7 +47,7 @@ func echoCheckIdHandler(w http.ResponseWriter, r *http.Request) {
 	name := r.URL.Query().Get("name")
 	idInt, err := strconv.Atoi(id)
 	if err != nil {
-		log.Error("bad param.")
+		log.Print("bad param.")
 		http.Error(w, "Bad request", http.StatusBadRequest)
 		return
 	}
