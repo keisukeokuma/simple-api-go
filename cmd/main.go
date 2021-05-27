@@ -66,14 +66,24 @@ func echoCheckIdHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func echoTimeHandler(w http.ResponseWriter, r *http.Request) {
-	// query := r.URL.RawQuery
-	// time := time.Now()
-	layout := "Jan 2, 2006 at 3:04pm (MST)"
-	value := "Feb 3, 2013 at 7:54pm (PST)"
-	t, _ := time.Parse(layout, value)
+	query := r.URL.RawQuery
+	t := time.Now()
 
-	// if query == "" {
+	jst, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		fmt.Fprintf(w, "Time：%s\n", err)
+	}
+	jst_time := t.In(jst)
 
-	// }
-	fmt.Fprintf(w, "Time：%s\n", t)
+	if query == "date" {
+		const dateFormat = "2006/01/02"
+		fmt.Fprintf(w, "Time：%s\n", jst_time.Format(dateFormat))
+		return
+	} else if query == "time" {
+		const timeFormat = "15:04:05"
+		fmt.Fprintf(w, "Time：%s\n", jst_time.Format(timeFormat))
+		return
+	}
+
+	fmt.Fprintf(w, "Time：%s\n", jst_time)
 }
