@@ -67,6 +67,7 @@ func echoTimeHandler(w http.ResponseWriter, r *http.Request) {
 	jst, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
 		fmt.Fprintf(w, "Time：%s\n", err)
+		return
 	}
 	jst_time := t.In(jst)
 
