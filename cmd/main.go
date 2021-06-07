@@ -76,15 +76,18 @@ func echoTimeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	jst_time := t.In(jst)
 
-	if query == "date" {
-		const dateFormat = "2006/01/02"
-		fmt.Fprintf(w, "Time：%s\n", jst_time.Format(dateFormat))
-		return
-	} else if query == "time" {
-		const timeFormat = "15:04:05"
-		fmt.Fprintf(w, "Time：%s\n", jst_time.Format(timeFormat))
-		return
+const (
+	dateFormat = "2006/01/02"
+	timeFormat = "15:04:05"
+)
+...
+	var ret string
+	switch query {
+	case: "date":
+		ret = fmt.Sprintf(w, "Time：%s\n", jst_time.Format(dateFormat))
+	case "time": 
+		ret = fmt.Sprintf(w, "Time：%s\n", jst_time.Format(timeFormat))
 	}
 
-	fmt.Fprintf(w, "Time：%s\n", jst_time)
+	fmt.Fprintf(w, ret)
 }
