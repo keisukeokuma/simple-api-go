@@ -1,6 +1,6 @@
 # go-simple-api
 
-- go 1.13.x
+- go 1.16.x
 - [docker-desktop](https://www.docker.com/products/docker-desktop)
 
 ## usage
